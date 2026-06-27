@@ -28,15 +28,16 @@ The application relies on the following package versions:
 ## 📁 Project Structure
 Project directory is organized like this:
 
+```text
 ScanMap/
 │
-├── backend/               # Python Flask logic
-│   ├── app.py             # Main Flask server entry point
-│   └── requirements.txt   # Mandatory Python library dependencies
+├── backend/               # Python Flask logic
+│   ├── app.py             # Main Flask server entry point
+│   └── requirements.txt   # Mandatory Python library dependencies
 │
-├── frontend/              # Web user interface
-│   ├── index.html         # Upload interface page
-│   ├── script.js          # Client-side form handling
-│   └── style.css          # Clean layout styling
+├── frontend/              # Web user interface
+│   ├── index.html         # Upload interface page
+│   ├── script.js          # Client-side form handling
+│   └── style.css          # Clean layout styling
 │
-└── README.md              # Project documentation and setup instructions
+└── README.md              # Project documentation and setup instructions
