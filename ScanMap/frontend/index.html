@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCANMAP - AI-Powered Invoice Automation</title>
+  <meta name="description" content="AI-powered invoice to template automation for College of Engineering Thalassery Placement Cell" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════ HOME PAGE ══════════════════════ -->
+<div id="page-home" class="page active">
+  <header>
+    <div class="container">
+      <h1>⚡ SCANMAP</h1>
+      <p>AI-Powered Invoice to Template Automation</p>
+    </div>
+  </header>
+  <main class="container">
+    <div class="upload-zone" id="upload-zone">
+      <input type="file" id="file-input" accept="image/*,.pdf" />
+      <div class="upload-icon">📄</div>
+      <h3 id="upload-title">Upload Invoice</h3>
+      <p id="upload-subtitle">Drag & drop or click to browse • PDF, PNG, JPG</p>
+      <div class="progress-bar" id="progress-bar" style="display:none">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <p id="progress-text" style="display:none; font-size:13px; color:var(--text-muted)"></p>
+    </div>
+
+    <button class="raw-text-toggle" id="raw-toggle" style="display:none" onclick="toggleRawText()">
+      📝 Show raw OCR text
+    </button>
+    <div class="raw-text-box" id="raw-text-box"></div>
+
+    <div class="nav-links" id="nav-links" style="display:none">
+      <a class="nav-link" onclick="showPage('expenditure')">📋 Expenditure Statement</a>
+      <a class="nav-link" onclick="showPage('report')">📄 Training Report</a>
+      <a class="nav-link" onclick="showPage('schedule')">📅 Training Schedule</a>
+    </div>
+
+    <div class="download-all-row" id="templates-header" style="display:none">
+      <h3>Generated Templates</h3>
+      <button class="btn btn-primary" onclick="downloadAll()">⬇ Download All</button>
+    </div>
+    <div class="template-grid" id="template-grid" style="display:none">
+      <div class="template-card" onclick="downloadPdf('expenditure')">
+        <div class="template-icon">📋</div>
+        <h4>Expenditure Statement</h4>
+        <p>Official expenditure with invoice details and sanction request</p>
+      </div>
+      <div class="template-card" onclick="downloadPdf('report')">
+        <div class="template-icon">📄</div>
+        <h4>Training Report</h4>
+        <p>Detailed training report with program overview and outcomes</p>
+      </div>
+      <div class="template-card" onclick="downloadPdf('schedule')">
+        <div class="template-icon">📅</div>
+        <h4>Training Schedule</h4>
+        <p>Day-wise training schedule with topics and session details</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ══════════════════════ EXPENDITURE PAGE ══════════════════════ -->
+<div id="page-expenditure" class="page">
+  <header>
+    <div class="container header-row">
+      <div style="display:flex;align-items:center">
+        <button class="back-btn" style="display:inline-flex" onclick="showPage('home')">←</button>
+        <div>
+          <h1>📋 Expenditure Statement</h1>
+          <p>Edit invoice & training details for expenditure PDF</p>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="downloadPdf('expenditure')">⬇ Download PDF</button>
+    </div>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h2>Invoice Details</h2>
+      <div class="form-grid">
+        <div class="field"><label>Invoice Number</label><input id="exp-invoiceNumber" /></div>
+        <div class="field"><label>Invoice Date</label><input id="exp-invoiceDate" /></div>
+        <div class="field"><label>Price Per Session (₹)</label><input type="number" id="exp-pricePerSession" /></div>
+        <div class="field"><label>Total Sessions</label><input type="number" id="exp-totalSessions" /></div>
+        <div class="field"><label>Total Amount (₹)</label><input type="number" id="exp-totalAmount" /></div>
+        <div class="field"><label>Accommodation Charge (₹)</label><input type="number" id="exp-accommodationCharge" /></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Training Context</h2>
+      <div class="form-grid">
+        <div class="field"><label>College Name</label><input id="exp-collegeName" /></div>
+        <div class="field">
+          <label>Department</label>
+          <select id="exp-department">
+            <option value="">Select Department</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Civil">Civil</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Electronics and Communication">Electronics and Communication</option>
+            <option value="Electrical and Electronics">Electrical and Electronics</option>
+             <option value="MCA">MCA</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Year</label>
+          <select id="exp-year">
+            <option value="">Select Year</option>
+            <option value="1st">First Year</option>
+            <option value="2nd">Second Year</option>
+            <option value="3rd">Third Year</option>
+            <option value="4th">Fourth Year</option>
+          </select>
+        </div>
+        <div class="field"><label>Target Students</label><input id="exp-targetStudents" /></div>
+        <div class="field">
+          <label>Training Type</label>
+          <select id="exp-trainingType">
+            <option value="Coding">Coding</option>
+            <option value="Soft Skill">Soft Skill</option>
+            <option value="Aptitude">Aptitude</option>
+            <option value="Technical">Technical</option>
+            <option value="Communication">Communication</option>
+          </select>
+        </div>
+        <div class="field"><label>Number of Days</label><input type="number" id="exp-numberOfDays" /></div>
+        <div class="field"><label>Sessions Per Day</label><input type="number" id="exp-sessionsPerDay" /></div>
+        <div class="field"><label>Session Timings</label><input id="exp-sessionTimings" /></div>
+        <div class="field"><label>Start Date</label><input id="exp-startDate" /></div>
+        <div class="field"><label>End Date</label><input id="exp-endDate" /></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Payment Details</h2>
+      <div class="form-grid">
+        <div class="field"><label>Account Number</label><input id="exp-accountNumber" /></div>
+        <div class="field"><label>Account Name</label><input id="exp-accountName" /></div>
+        <div class="field"><label>IFSC Code</label><input id="exp-ifscCode" /></div>
+        <div class="field"><label>Bank Name</label><input id="exp-bankName" /></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ══════════════════════ REPORT PAGE ══════════════════════ -->
+<div id="page-report" class="page">
+  <header>
+    <div class="container header-row">
+      <div style="display:flex;align-items:center">
+        <button class="back-btn" style="display:inline-flex" onclick="showPage('home')">←</button>
+        <div>
+          <h1>📄 Training Report</h1>
+          <p>Edit training details for the report PDF</p>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="downloadPdf('report')">⬇ Download PDF</button>
+    </div>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h2>Training Details</h2>
+      <div class="form-grid">
+        <div class="field"><label>College Name</label><input id="rpt-collegeName" /></div>
+        <div class="field">
+          <label>Department</label>
+          <select id="rpt-department">
+            <option value="">Select Department</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Civil">Civil</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Electronics and Communication">Electronics and Communication</option>
+            <option value="Electrical and Electronics">Electrical and Electronics</option>
+             <option value="MCA">MCA</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Year</label>
+          <select id="rpt-year">
+            <option value="">Select Year</option>
+            <option value="1st">First Year</option>
+            <option value="2nd">Second Year</option>
+            <option value="3rd">Third Year</option>
+            <option value="4th">Fourth Year</option>
+          </select>
+        </div>
+        <div class="field"><label>Target Students</label><input id="rpt-targetStudents" /></div>
+        <div class="field">
+          <label>Training Type</label>
+          <select id="rpt-trainingType">
+            <option value="Coding">Coding</option>
+            <option value="Soft Skill">Soft Skill</option>
+            <option value="Aptitude">Aptitude</option>
+            <option value="Technical">Technical</option>
+            <option value="Communication">Communication</option>
+          </select>
+        </div>
+        <div class="field"><label>Training Topic</label><input id="rpt-trainingTopic" /></div>
+        <div class="field"><label>Start Date</label><input id="rpt-startDate" /></div>
+        <div class="field"><label>End Date</label><input id="rpt-endDate" /></div>
+        <div class="field"><label>Number of Days</label><input type="number" id="rpt-numberOfDays" /></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Report Description</h2>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Leave blank to auto-generate based on training type.</p>
+      <div class="field"><textarea id="rpt-reportDescription" rows="5" placeholder="Leave blank for auto-generated..."></textarea></div>
+    </div>
+  </main>
+</div>
+
+<!-- ══════════════════════ SCHEDULE PAGE ══════════════════════ -->
+<div id="page-schedule" class="page">
+  <header>
+    <div class="container header-row">
+      <div style="display:flex;align-items:center">
+        <button class="back-btn" style="display:inline-flex" onclick="showPage('home')">←</button>
+        <div>
+          <h1>📅 Training Schedule</h1>
+          <p>Edit day-wise schedule for the training PDF</p>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="downloadPdf('schedule')">⬇ Download PDF</button>
+    </div>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h2>Program Details</h2>
+      <div class="form-grid">
+        <div class="field"><label>College Name</label><input id="sch-collegeName" /></div>
+        <div class="field">
+          <label>Department</label>
+          <select id="sch-department">
+            <option value="">Select Department</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Civil">Civil</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Electronics and Communication">Electronics and Communication</option>
+            <option value="Electrical and Electronics">Electrical and Electronics</option>
+             <option value="MCA">MCA</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Year</label>
+          <select id="sch-year">
+            <option value="">Select Year</option>
+            <option value="1st">First Year</option>
+            <option value="2nd">Second Year</option>
+            <option value="3rd">Third Year</option>
+            <option value="4th">Fourth Year</option>
+          </select>
+        </div>
+        <div class="field"><label>Target Students</label><input id="sch-targetStudents" /></div>
+        <div class="field">
+          <label>Training Type</label>
+          <select id="sch-trainingType">
+            <option value="Coding">Coding</option>
+            <option value="Soft Skill">Soft Skill</option>
+            <option value="Aptitude">Aptitude</option>
+            <option value="Technical">Technical</option>
+            <option value="Communication">Communication</option>
+          </select>
+        </div>
+        <div class="field"><label>Training Topic</label><input id="sch-trainingTopic" /></div>
+        <div class="field"><label>Start Date</label><input id="sch-startDate" /></div>
+        <div class="field"><label>End Date</label><input id="sch-endDate" /></div>
+        <div class="field"><label>Number of Days</label><input type="number" id="sch-numberOfDays" /></div>
+        <div class="field"><label>Sessions Per Day</label><input type="number" id="sch-sessionsPerDay" /></div>
+        <div class="field"><label>Session Timings</label><input id="sch-sessionTimings" /></div>
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label>Objective</label>
+        <textarea id="sch-objective" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Day-wise Schedule</h2>
+      <div id="schedule-days"></div>
+      <button class="btn btn-outline" style="width:100%;margin-top:12px" onclick="addScheduleDay()">+ Add Day</button>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
