@@ -1,11 +1,11 @@
 # ScanMap - Placement Cell Automation
 
-ScanMap is a stateless document processing web application designed to streamline administrative workflows for college placement cells. The system utilizes Optical Character Recognition (OCR) and document parsing engines to extract text from scanned files and automatically generate structured, professional Word documents for training reports and expenditure statements.
+ScanMap is a stateless document processing web application designed to streamline administrative workflows for college placement cells. The system utilizes Optical Character Recognition (OCR) and document parsing engines to extract text from scanned files and automatically generate structured, professional pdf documents for training reports, training schedule and expenditure statements.
 
 ## 🚀 Features
 * **Automated Data Extraction:** Processes scanned input files to extract text data cleanly without manual transcription.
 * **Stateless Workflow:** Operates with zero persistent database storage—files are processed on-the-fly for real-time document delivery.
-* **Professional Report Generation:** Converts raw data matches directly into cleanly structured Microsoft Word (.docx) files.
+* **Professional Report Generation:** Converts raw data matches directly into cleanly structured pdf files.
 * **Clean Web Interface:** Simple frontend layout with optimized file upload interfaces.
 
 ## 🛠️ Tech Stack & Dependencies
