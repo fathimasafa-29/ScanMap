@@ -26,9 +26,8 @@ The application relies on the following package versions:
 ---
 
 ## 📁 Project Structure
-Your project directory is organized like this:
+Project directory is organized like this:
 
-```text
 ScanMap/
 │
 ├── backend/               # Python Flask logic
